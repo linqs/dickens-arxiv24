@@ -1,0 +1,146 @@
+{
+  "options": {
+    "categoricalevaluator.defaultpredicate": "ImageDigit",
+    "inference.normalize": false,
+    "runtime.db.intids": true,
+    "runtime.log.level": "INFO",
+    "runtime.validation": true,
+    "gradientdescent.savevalidationweights": true,
+    "gradientdescent.symbolicweightlearning": false,
+    "runtime.learn.output.model.path": "./visual_sudoku_learned.psl"
+  },
+  "infer": {
+    "rules": [
+      "1.0: !EmptyBlock(PuzzleId, X, Y) && NeuralClassifier(PuzzleId, X, Y, Num) -> ImageDigit(PuzzleId, X, Y, Num)",
+      "1.0: !EmptyBlock(PuzzleId, X, Y) && ImageDigit(PuzzleId, X, Y, Num) -> NeuralClassifier(PuzzleId, X, Y, Num)",
+
+      "ImageDigit(PuzzleId, X, +Y, Num) = 1.0 .",
+      "ImageDigit(PuzzleId, +X, Y, Num) = 1.0 .",
+      "ImageDigit(PuzzleId, X1, Y1, Num) && Box(BoxId, X1, Y1) && Box(BoxId, X2, Y2) && (X1 != X2) && (Y1 != Y2) -> !ImageDigit(PuzzleId, X2, Y2, Num) .",
+
+      "ImageDigit(PuzzleId, X, Y, +Num) = 1.0 ."
+    ]
+  },
+  "learn": {
+    "rules": [
+      "1.0: !EmptyBlock(PuzzleId, X, Y) && NeuralClassifier(PuzzleId, X, Y, Num) -> ImageDigit(PuzzleId, X, Y, Num)",
+      "1.0: !EmptyBlock(PuzzleId, X, Y) && ImageDigit(PuzzleId, X, Y, Num) -> NeuralClassifier(PuzzleId, X, Y, Num)",
+
+      "1.0: NeuralClassifier(PuzzleId, X, +Y, Num) <= 1.0 ^2 {Y: !EmptyBlock(PuzzleId, X, Y)}",
+      "1.0: NeuralClassifier(PuzzleId, +X, Y, Num) <= 1.0 ^2 {X: !EmptyBlock(PuzzleId, X, Y)}",
+      "1.0: NeuralClassifier(PuzzleId, X1, Y1, Num) && Box(BoxId, X1, Y1) && Box(BoxId, X2, Y2) && !EmptyBlock(PuzzleId, X1, Y1) && !EmptyBlock(PuzzleId, X2, Y2) && (X1 != X2) && (Y1 != Y2) -> !NeuralClassifier(PuzzleId, X2, Y2, Num) ^2",
+
+      "ImageDigit(PuzzleId, X, Y, +Num) = 1.0 ."
+    ]
+  },
+  "predicates": {
+    "NeuralClassifier/4": {
+      "type": "DeepPredicate",
+      "evaluations": [
+        {
+          "evaluator": "CategoricalEvaluator",
+          "options": {
+              "categoricalevaluator.categoryindexes": 3
+          }
+        }
+      ],
+      "options": {
+        "model-path": "../../neural/models/mnist_classifier_neupsl.py::MNISTClassifierNeuPSL",
+        "entity-data-map-path": "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/neural-data-train.txt",
+        "inference::entity-data-map-path": "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/neural-data-test.txt",
+        "entity-argument-indexes": "0,1,2",
+        "class-size": 9,
+        "save-path": "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/saved-networks/nesy-trained-digit-classifier.pt",
+        "pretrain-path": "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/saved-networks/pretrained-digit-classifier.pt",
+        "neural_learning_rate": "1.0e-4",
+        "alpha": "0.0",
+        "weight_decay": "1.0e-6",
+        "dropout": "0.0"
+      },
+      "targets": {
+        "learn": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-targets-train.txt"
+        ],
+        "validation": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-targets-valid.txt"
+        ],
+        "infer": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-targets-test.txt"
+        ]
+      },
+      "truth": {
+        "validation": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-truth-valid.txt"
+        ],
+        "infer": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-truth-test.txt"
+        ]
+      }
+    },
+    "ImageDigit/4": {
+      "options": {
+        "Integer": false
+      },
+      "evaluations": [
+        {
+          "primary": true,
+          "evaluator": "CategoricalEvaluator",
+          "options": {
+              "categoricalevaluator.categoryindexes": 3
+          }
+        }
+      ],
+      "targets": {
+        "learn": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-targets-train.txt",
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/empty-block-targets-train.txt"
+        ],
+        "validation": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-targets-valid.txt",
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/empty-block-targets-valid.txt"
+        ],
+        "infer": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-targets-test.txt",
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/empty-block-targets-test.txt"
+        ]
+      },
+      "truth": {
+        "learn": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-truth-train.txt"
+        ],
+        "validation": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-truth-valid.txt"
+        ],
+        "infer": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/digit-truth-test.txt"
+        ]
+      }
+    },
+    "EmptyBlock/3": {
+      "observations": {
+        "learn": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/empty-block-obs-train.txt"
+        ],
+        "validation": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/empty-block-obs-valid.txt"
+        ],
+        "infer": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/empty-block-obs-test.txt"
+        ]
+      }
+    },
+    "Box/3": {
+      "observations": {
+        "learn": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/box-obs-train.txt"
+        ],
+        "validation": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/box-obs-valid.txt"
+        ],
+        "infer": [
+          "../data/mnist-9x9/split::0/train-size::0020/num-clues::30/unlabeled::0.00/box-obs-test.txt"
+        ]
+      }
+    }
+  }
+}

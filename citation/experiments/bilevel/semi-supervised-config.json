@@ -1,0 +1,92 @@
+{
+  "options": {
+    "categoricalevaluator.defaultpredicate": "HasCat",
+    "gradientdescent.movementbreak": false,
+    "gradientdescent.numsteps": 1000,
+    "gradientdescent.runfulliterations": false,
+    "gradientdescent.savevalidationweights": true,
+    "gradientdescent.scalestepsize": false,
+    "gradientdescent.stopcomputeperiod": 1,
+    "gradientdescent.trainingcomputeperiod": 1,
+    "gradientdescent.validationcomputeperiod": 5,
+    "gradientdescent.validationbreak": true,
+    "gradientdescent.validationpatience": 50,
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": 60,
+    "inference.normalize": false,
+    "minimizer.finalparametermovementconvergencetolerance": 1.0e-1,
+    "minimizer.initialsquaredpenalty": 2.0,
+    "minimizer.objectivedifferencetolerance": 1.0e-3,
+    "minimizer.proxruleweight": 1.0e-2,
+    "minimizer.proxvaluestepsize": 1.0e-3,
+    "minimizer.squaredpenaltyincreaserate": 2.0,
+    "runtime.db.intids": true,
+    "runtime.learn": true,
+    "runtime.learn.method": "SquaredError",
+    "runtime.learn.output.model.path": "./citation_learned.psl",
+    "runtime.inference.method": "GurobiInference",
+    "runtime.log.level": "INFO",
+    "runtime.validation": true,
+    "weightlearning.inference": "GurobiInference"
+  },
+  "hyperparameters": {
+    "gradientdescent.stepsize": [1.0e-1, 1.0e-2, 1.0e-3],
+    "minimizer.energylosscoefficient": [0.0, 0.1, 1.0, 10.0],
+    "learning-rate": [1.0e-1, 1.0e-2, 1.0e-3],
+    "weight-decay": [1.0e-6]
+  },
+  "default": {
+    "citeseer": {
+      "0.05": {
+        "gradientdescent.stepsize": 1.0e-1,
+        "minimizer.energylosscoefficient": 1.0,
+        "learning-rate": 1.5e-0,
+        "weight-decay": 1.0e-6
+      },
+      "0.10": {
+        "gradientdescent.stepsize": 1.0e-1,
+        "minimizer.energylosscoefficient": 1.0,
+        "learning-rate": 1.5e-0,
+        "weight-decay": 1.0e-6
+      },
+      "0.50": {
+        "gradientdescent.stepsize": 1.0e-1,
+        "minimizer.energylosscoefficient": 1.0,
+        "learning-rate": 1.5e-0,
+        "weight-decay": 1.0e-6
+      },
+      "1.00": {
+        "gradientdescent.stepsize": 1.0e-1,
+        "minimizer.energylosscoefficient": 1.0,
+        "learning-rate": 1.5e-0,
+        "weight-decay": 1.0e-6
+      }
+    },
+    "cora": {
+      "0.05": {
+        "gradientdescent.stepsize": 1.0e-1,
+        "minimizer.energylosscoefficient": 1.0,
+        "learning-rate": 1.5e-0,
+        "weight-decay": 5.0e-7
+      },
+      "0.10": {
+        "gradientdescent.stepsize": 1.0e-1,
+        "minimizer.energylosscoefficient": 1.0,
+        "learning-rate": 1.5e-0,
+        "weight-decay": 5.0e-7
+      },
+      "0.50": {
+        "gradientdescent.stepsize": 1.0e-1,
+        "minimizer.energylosscoefficient": 1.0,
+        "learning-rate": 1.5e-0,
+        "weight-decay": 5.0e-7
+      },
+      "1.00": {
+        "gradientdescent.stepsize": 1.0e-1,
+        "minimizer.energylosscoefficient": 1.0,
+        "learning-rate": 1.5e-0,
+        "weight-decay": 5.0e-7
+      }
+    }
+  }
+}

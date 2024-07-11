@@ -1,0 +1,36 @@
+{
+  "options": {
+    "runtime.log.level": "TRACE",
+    "runtime.learn": "false",
+    "runtime.inference": "true",
+    "runtime.inference.method": "GurobiInference",
+    "weightlearning.inference": "GurobiInference",
+    "gurobi.worklimit": 60
+  },
+  "rules": [
+    "Order('station_wagon', '1') = 1 .",
+    "Order('minivan', '1') <= 1 - Order('convertible', '2') - Order('convertible', '3') .",
+    "Order('minivan', '2') <= 1 - Order('convertible', '3') .",
+    "Order('minivan', '3') <= 1 .",
+    "Order(Vehicle, '1') + Order(Vehicle, '2') + Order(Vehicle, '3') = 1 .",
+    "Order('station_wagon', OrderIndex) + Order('minivan', OrderIndex) + Order('convertible', OrderIndex) = 1 ."
+  ],
+  "predicates": {
+    "Order/2": {
+      "options": {
+        "Integer": "true"
+      },
+      "targets": [
+        ["station_wagon","1"],
+        ["station_wagon","2"],
+        ["station_wagon","3"],
+        ["minivan","1"],
+        ["minivan", "2"],
+        ["minivan", "3"],
+        ["convertible","1"],
+        ["convertible", "2"],
+        ["convertible", "3"]
+      ]
+    }
+  }
+}

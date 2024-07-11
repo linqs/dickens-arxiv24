@@ -1,0 +1,41 @@
+{
+  "LEARNING_METHOD":  "constraint_satisfaction",
+  "STANDARD_EXPERIMENT_OPTIONS": {
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": "60",
+    "inference.normalize": false,
+    "runtime.inference.clearrules": false,
+    "runtime.inference.method": "GurobiInference",
+    "runtime.learn": false,
+    "runtime.log.level": "INFO"
+  },
+  "MODEL_WL_METHODS": {
+    "warcraft-map-constraint-satisfaction.json": [
+      "Constraint_Satisfaction"
+    ]
+  },
+  "BEST_HYPERPARAMETERS": {
+    "warcraft-map-constraint-satisfaction.json": {
+      "Constraint_Satisfaction": {
+        "UNLABELED_RATIO": {
+          "0.00": {
+            "PSL_OPTIONS": {},
+            "NEURAL_OPTIONS": {}
+          },
+          "0.50": {
+            "PSL_OPTIONS": {},
+            "NEURAL_OPTIONS": {}
+          },
+          "0.90": {
+            "PSL_OPTIONS": {},
+            "NEURAL_OPTIONS": {}
+          },
+          "0.95": {
+            "PSL_OPTIONS": {},
+            "NEURAL_OPTIONS": {}
+          }
+        }
+      }
+    }
+  }
+}

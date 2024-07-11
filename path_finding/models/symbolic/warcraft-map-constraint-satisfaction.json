@@ -1,0 +1,146 @@
+{
+  "options": {
+    "categoricalevaluator.defaultpredicate": "OnPath",
+    "inference.normalize": false,
+    "runtime.db.intids": true,
+    "runtime.learn.output.model.path": "./path_finding_learned.psl",
+    "runtime.log.level": "INFO",
+    "runtime.validation": true
+  },
+  "infer": {
+    "rules": [
+      "OnPath(MapId, '0', '0') = 1.0 .",
+      "OnPath(MapId, '11', '11') = 1.0 .",
+      "OnPath(MapId, '12', '12') = 1.0 .",
+      "Path(MapId, '12', '12', '0', '0') = 1.0 .",
+      "Path(MapId, '11', '11', '12', '12') = 1.0 .",
+      "Path(MapId, X, Y, +OutX, +OutY) = OnPath(MapId, X, Y) .",
+      "Path(MapId, +InX, +InY, X, Y) = OnPath(MapId, X, Y) .",
+      "Path(MapId, X1, Y1, X2, Y2) -> !Path(MapId, X2, Y2, X1, Y1) .",
+      "Path(MapId, X, Y, X, Y) = 0 .",
+      "1.0: 0*FlattenedToCoordinateBlock(XY, X, Y) + NeuralPathfinder(MapId, XY) = OnPath(MapId, X, Y)",
+      "1.0: !OnPath(MapId, X, Y)"
+    ]
+  },
+  "learn": {
+    "rules": [
+      "OnPath(MapId, '0', '0') = 1.0 .",
+      "OnPath(MapId, '11', '11') = 1.0 .",
+      "OnPath(MapId, '12', '12') = 1.0 .",
+      "Path(MapId, '12', '12', '0', '0') = 1.0 .",
+      "Path(MapId, '11', '11', '12', '12') = 1.0 .",
+      "Path(MapId, X, Y, +OutX, +OutY) = OnPath(MapId, X, Y) .",
+      "Path(MapId, +InX, +InY, X, Y) = OnPath(MapId, X, Y) .",
+      "Path(MapId, X1, Y1, X2, Y2) -> !Path(MapId, X2, Y2, X1, Y1) .",
+      "Path(MapId, X, Y, X, Y) = 0 .",
+      "1.0: 0*FlattenedToCoordinateBlock(XY, X, Y) + NeuralPathfinder(MapId, XY) = OnPath(MapId, X, Y)"
+    ]
+  },
+  "predicates": {
+    "NeuralPathfinder/2": {
+      "type": "DeepPredicate",
+      "options": {
+        "map-dimension": 12,
+        "model-path": "../models/neural/warcraft_pathfinder_neupsl.py::WarcraftPathfinderNeuPSL",
+        "entity-data-map-path": "../data/warcraft-map/split::0/unlabeled::0.00/neural-data.txt",
+        "entity-argument-indexes": "0",
+        "class-size": 144,
+        "save-path": "../data/warcraft-map/split::0/unlabeled::0.00/saved-networks/supervision-trained-pathfinder.pt",
+        "pretrain-path": "../data/warcraft-map/split::0/unlabeled::0.00/saved-networks/supervision-trained-pathfinder.pt",
+        "weight_decay": 1.0e-6,
+        "dropout": 0.0,
+        "categorical": true,
+        "categoricalindexes": "1"
+      },
+      "targets": {
+        "learn": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/neural-path-target-train.txt"
+        ],
+        "validation": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/neural-path-target-valid.txt"
+        ],
+        "infer": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/neural-path-target-test.txt"
+        ]
+      }
+    },
+    "Path/5": {
+      "options": {
+        "Integer": "true"
+      },
+      "evaluations": [
+        {
+          "evaluator": "DiscreteEvaluator"
+        }
+      ],
+      "targets": {
+        "learn": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/path-target-train.txt"
+        ],
+        "validation": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/path-target-valid.txt"
+        ],
+        "infer": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/path-target-test.txt"
+        ]
+      },
+      "truth": {
+        "learn": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/path-truth-train.txt"
+        ],
+        "validation": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/path-truth-valid.txt"
+        ],
+        "infer": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/path-truth-test.txt"
+        ]
+      }
+    },
+    "OnPath/3": {
+      "options": {
+        "Integer": "true"
+      },
+      "evaluations": [
+        {
+          "evaluator": "DiscreteEvaluator",
+          "primary": true
+        }
+      ],
+      "targets": {
+        "learn": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/on-path-target-train.txt"
+        ],
+        "validation": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/on-path-target-valid.txt"
+        ],
+        "infer": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/on-path-target-test.txt"
+        ]
+      },
+      "truth": {
+        "learn": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/on-path-truth-train.txt"
+        ],
+        "validation": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/on-path-truth-valid.txt"
+        ],
+        "infer": [
+            "../data/warcraft-map/split::0/unlabeled::0.00/on-path-truth-test.txt"
+        ]
+      }
+    },
+    "FlattenedToCoordinateBlock/3": {
+      "observations": {
+        "learn": [
+            "../data/warcraft-map/flattened-to-coordinate-block-obs.txt"
+        ],
+        "validation": [
+            "../data/warcraft-map/flattened-to-coordinate-block-obs.txt"
+        ],
+        "infer": [
+            "../data/warcraft-map/flattened-to-coordinate-block-obs.txt"
+        ]
+      }
+    }
+  }
+}

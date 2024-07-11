@@ -1,0 +1,83 @@
+Task Description: You are given a problem description. The task is to parse the problem as a logical program, defining the Domain, Predicates, Targets, Rules, and Query. Use plain text formatting with no bullets.
+------
+Problem:
+The following paragraphs each describe a set of three objects arranged in a fixed order. The statements are logically consistent within each paragraph.\n\nIn an antique car show, there are three vehicles: a station wagon, a convertible, and a minivan. The station wagon is the oldest. The minivan is newer than the convertible.
+Options:
+A) The station wagon is the second-newest.
+B) The convertible is the second-newest.
+C) The minivan is the second-newest.
+###
+Rewrite:
+[oldest = x__, second-oldest = _x_, third-oldest = __x]
+[newest = __x, second-newest = _x_, third-newest = x__]
+Domain:
+x__,_x_,__x
+Predicates:
+Order(Vehicle,OrderIndex)
+Targets:
+{"Order": [["station-wagon", "convertible", "minivan"], ["x__", "_x_", "__x"]]}
+Rules:
+// The station wagon is the oldest: x__
+Order("station-wagon", "x__") = 1
+// The minivan is newer than the convertible: minivan > convertible
+Order("convertible", OrderIndexConvertible) & Order("minivan", OrderIndexMinivan) -> (OrderIndexConvertible < OrderIndexMinivan)
+// Each vehicle has one order index.
+Order(Vehicle, "x__") + Order(Vehicle, "_x_") + Order(Vehicle, "__x") = 1
+// Each order index is assigned to one vehicle.
+Order("station-wagon", OrderIndex) + Order("minivan", OrderIndex) + Order("convertible", OrderIndex) = 1
+Query:
+// The station wagon is the second-newest: _x_
+Order("station-wagon", "_x_") = 1
+// The convertible is the second-newest: _x_
+Order("convertible", "_x_") = 1
+// The minivan is the second-newest: _x_
+Order("minivan", "_x_") = 1
+------
+Problem:
+The following paragraphs each describe a set of five objects arranged in a fixed order. The statements are logically consistent within each paragraph.\n\nOn a branch, there are five birds: a quail, an owl, a raven, a falcon, and a robin. The owl is the leftmost. The robin is to the left of the raven. The quail is the rightmost. The raven is the third from the left.
+Options:
+A) The quail is the rightmost.
+B) The owl is the rightmost.
+C) The raven is the rightmost.
+D) The falcon is the rightmost.
+E) The robin is the rightmost.
+###
+Rewrite:
+[leftmost = x____, second-leftmost = _x___, third-leftmost = __x__, fourth-leftmost = ___x_, fifth-leftmost = ____x]
+[rightmost = ____x, second-rightmost = ___x_, third-rightmost = __x__, fourth-rightmost = _x___, fifth-rightmost = x____]
+Domain:
+x____,_x___,__x__,___x_,____x
+Predicates:
+Order(Bird,OrderIndex)
+Targets:
+{"Order": [["quail", "owl", "raven", "falcon", "robin"], ["x____", "_x___", "__x__", "___x_", "____x"]]}
+Rules:
+// The owl is the leftmost: x____
+Order("owl", "x____") = 1
+// The raven is the third from the left: __x__
+Order("raven", "__x__") = 1
+// The quail is the rightmost: ____x
+Order("quail", "____x") = 1
+// The robin is to the left of the raven: robin < raven
+Order("robin", OrderIndexRobin) & Order("raven", OrderIndexRaven) -> (OrderIndexRobin < OrderIndexRaven)
+// Each bird has one order index.
+Order(Bird, "x____") + Order(Bird, "_x___") + Order(Bird, "__x__") + Order(Bird, "___x_") + Order(Bird, "____x") = 1
+// Each order index is assigned to one bird.
+Order("quail", OrderIndex) + Order("owl", OrderIndex) + Order("raven", OrderIndex) + Order("falcon", OrderIndex) + Order("robin", OrderIndex) = 1
+Query:
+// The quail is the rightmost: ____x
+Order("quail", "____x") = 1
+// The owl is the rightmost: ____x
+Order("owl", "____x") = 1
+// The raven is the rightmost: ____x
+Order("raven", "____x") = 1
+// The falcon is the rightmost: ____x
+Order("falcon", "____x") = 1
+// The robin is the rightmost: ____x
+Order("robin", "____x") = 1
+------
+Problem:
+[[PROBLEM]]
+Options:
+[[CHOICES]]
+###

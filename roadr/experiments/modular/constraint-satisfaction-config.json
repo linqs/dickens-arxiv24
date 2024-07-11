@@ -1,0 +1,21 @@
+{
+  "options": {
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": 60,
+    "inference.normalize": false,
+    "runtime.db.intids": true,
+    "runtime.inference.method": "GurobiInference",
+    "runtime.inference.deep.batching": "true",
+    "runtime.inference.output.results": "true",
+    "runtime.learn": false,
+    "runtime.log.level": "INFO"
+  },
+  "hyperparameters": {
+  },
+  "default": {
+    "roadr": {
+      "0.00": {
+      }
+    }
+  }
+}

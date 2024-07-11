@@ -1,0 +1,47 @@
+# System files #
+################
+.DS_Store
+
+# IDE metadata #
+####################
+.classpath
+.project
+.settings
+.idea/
+*.iml
+
+# Editor Temporary #
+####################
+*.swp
+
+# Python #
+##########
+__pycache__
+
+# Data #
+########
+*.zip
+
+# Experiment Output #
+#####################
+*_learned.psl
+*.jar
+out*.txt
+out*.err
+*.pt
+inferred-predicates/
+results/
+results.tar.gz
+data/
+data.tar.gz
+!roadr/data/
+psl-examples/
+trained/
+
+# Temporary experiment files #
+##############################
+citation/cli/citation.json
+mnist_addition/cli/mnist-addition.json
+visual_sudoku_solving/cli/visual_sudoku.json
+path_finding/cli/path_finding.json
+roadr/cli/roadr.json

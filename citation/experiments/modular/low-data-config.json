@@ -1,0 +1,28 @@
+{
+  "options": {
+    "categoricalevaluator.defaultpredicate": "HasCat",
+    "continuousrandomgridsearch.maxlocations": 500,
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": 60,
+    "inference.normalize": false,
+    "runtime.db.intids": true,
+    "runtime.learn": true,
+    "runtime.learn.method": "ContinuousRandomGridSearch",
+    "runtime.learn.output.model.path": "./citation_learned.psl",
+    "runtime.inference.method": "GurobiInference",
+    "runtime.log.level": "INFO",
+    "weightlearning.inference": "GurobiInference"
+  },
+  "hyperparameters": {
+  },
+  "default": {
+    "citeseer": {
+      "20.00": {
+      }
+    },
+    "cora": {
+      "20.00": {
+      }
+    }
+  }
+}

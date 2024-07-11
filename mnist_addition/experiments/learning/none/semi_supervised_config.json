@@ -1,0 +1,74 @@
+{
+  "LEARNING_METHOD":  "none",
+  "STANDARD_EXPERIMENT_OPTIONS": {
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": "60",
+    "inference.normalize": false,
+    "runtime.inference.clearrules": false,
+    "runtime.inference.method": "GurobiInference",
+    "runtime.learn": false,
+    "runtime.log.level": "INFO"
+  },
+  "MODEL_WL_METHODS": {
+    "mnist-add1-baseline.json": [
+      "None"
+    ],
+    "mnist-add2-baseline.json": [
+      "None"
+    ]
+  },
+  "BEST_HYPERPARAMETERS": {
+    "mnist-add1-baseline.json": {
+      "None": {
+        "TRAIN_SIZE": {
+          "00600": {
+            "UNLABELED_RATIO": {
+              "0.00": {
+                "PSL_OPTIONS": {},
+                "NEURAL_OPTIONS": {}
+              },
+              "0.50": {
+                "PSL_OPTIONS": {},
+                "NEURAL_OPTIONS": {}
+              },
+              "0.90": {
+                "PSL_OPTIONS": {},
+                "NEURAL_OPTIONS": {}
+              },
+              "0.95": {
+                "PSL_OPTIONS": {},
+                "NEURAL_OPTIONS": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "mnist-add2-baseline.json": {
+      "None": {
+        "TRAIN_SIZE": {
+          "00600": {
+            "UNLABELED_RATIO": {
+              "0.00": {
+                "PSL_OPTIONS": {},
+                "NEURAL_OPTIONS": {}
+              },
+              "0.50": {
+                "PSL_OPTIONS": {},
+                "NEURAL_OPTIONS": {}
+              },
+              "0.90": {
+                "PSL_OPTIONS": {},
+                "NEURAL_OPTIONS": {}
+              },
+              "0.95": {
+                "PSL_OPTIONS": {},
+                "NEURAL_OPTIONS": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

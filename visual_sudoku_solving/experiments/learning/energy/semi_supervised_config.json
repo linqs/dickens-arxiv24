@@ -1,0 +1,108 @@
+{
+  "LEARNING_METHOD":  "energy",
+  "STANDARD_EXPERIMENT_OPTIONS": {
+    "categoricalevaluator.defaultpredicate": "ImageDigit",
+    "gradientdescent.batchgenerator": "ConnectedComponentBatchGenerator",
+    "gradientdescent.movementbreak": false,
+    "gradientdescent.numsteps": 500,
+    "gradientdescent.runfulliterations": false,
+    "gradientdescent.savevalidationweights": true,
+    "gradientdescent.scalestepsize": false,
+    "gradientdescent.stopcomputeperiod": 1,
+    "gradientdescent.symbolicweightlearning": false,
+    "gradientdescent.trainingcomputeperiod": 1,
+    "gradientdescent.validationbreak": true,
+    "gradientdescent.validationcomputeperiod": 1,
+    "gradientdescent.validationpatience": 75,
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": 60,
+    "inference.normalize": false,
+    "runtime.inference.clearrules": true,
+    "runtime.inference.method": "GurobiInference",
+    "runtime.log.level": "INFO",
+    "weightlearning.inference": "GurobiInference"
+  },
+  "MODEL_WL_METHODS": {
+    "mnist-9x9-semi-supervised.json": [
+      "Energy"
+    ]
+  },
+  "STANDARD_OPTION_RANGES": {
+    "connectedcomponents.batchsize": ["4"]
+  },
+  "WL_METHOD_OPTION_RANGES": {
+    "Energy": {
+      "runtime.learn.method": ["Energy"]
+    }
+  },
+  "NEURAL_NETWORK_OPTION_RANGES": {
+    "dropout": ["0.0"],
+    "weight_decay": ["1.0e-6"],
+    "neural_learning_rate": ["1.0e-4", "1.0e-5"],
+    "alpha": ["0.1", "0.5", "0.9"]
+  },
+  "BEST_HYPERPARAMETERS": {
+    "mnist-9x9-semi-supervised.json": {
+      "Energy": {
+        "TRAIN_SIZE": {
+          "0020": {
+            "NUM_CLUES": {
+              "30": {
+                "UNLABELED_RATIO": {
+                  "0.00": {
+                    "PSL_OPTIONS": {
+                      "runtime.learn.method": "Energy",
+                      "connectedcomponents.batchsize": "4"
+                    },
+                    "NEURAL_OPTIONS": {
+                      "dropout": "0.0",
+                      "weight_decay": "1.0e-6",
+                      "neural_learning_rate": "1.0e-4",
+                      "alpha": "0.9"
+                    }
+                  },
+                  "0.50": {
+                    "PSL_OPTIONS": {
+                      "runtime.learn.method": "Energy",
+                      "connectedcomponents.batchsize": "4"
+                    },
+                    "NEURAL_OPTIONS": {
+                      "dropout": "0.0",
+                      "weight_decay": "1.0e-6",
+                      "neural_learning_rate": "1.0e-4",
+                      "alpha": "0.5"
+                    }
+                  },
+                  "0.90": {
+                    "PSL_OPTIONS": {
+                      "runtime.learn.method": "Energy",
+                      "connectedcomponents.batchsize": "4"
+                    },
+                    "NEURAL_OPTIONS": {
+                      "dropout": "0.0",
+                      "weight_decay": "1.0e-6",
+                      "neural_learning_rate": "1.0e-4",
+                      "alpha": "0.1"
+                    }
+                  },
+                  "0.95": {
+                    "PSL_OPTIONS": {
+                      "runtime.learn.method": "Energy",
+                      "connectedcomponents.batchsize": "4"
+                    },
+                    "NEURAL_OPTIONS": {
+                      "dropout": "0.0",
+                      "weight_decay": "1.0e-6",
+                      "neural_learning_rate": "1.0e-4",
+                      "alpha": "0.1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

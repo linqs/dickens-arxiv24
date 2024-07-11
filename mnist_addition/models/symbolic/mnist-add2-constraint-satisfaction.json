@@ -1,0 +1,184 @@
+{
+    "options": {
+        "categoricalevaluator.defaultpredicate": "ImageDigit",
+        "inference.normalize": "false",
+        "runtime.db.intids": true,
+        "runtime.log.level": "INFO"
+    },
+    "rules": [
+        "1.0: NeuralClassifier(ImageId, X) = ImageDigit(ImageId, X)",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId2, X) + ImageDigit(ImageId4, Y) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z) + 1.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace('0', X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z) + ImageDigit(ImageId2, X) <= ImageDigit(ImageId4, Y) + 1.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId4, Y) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z) <= ImageDigit(ImageId2, X) + 1.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumTensPlace('0', X, Y, Z) + ImageDigit(ImageId2, X) + ImageDigit(ImageId4, Y) <= Carry(ImageId2, ImageId4, Z) + 1.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId3, Y) + Carry(ImageId2, ImageId4, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId3, Y) <= Carry(ImageId2, ImageId4, W) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + Carry(ImageId2, ImageId4, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) + ImageDigit(ImageId1, X) <= ImageDigit(ImageId3, Y) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, X, Y, Z) + ImageDigit(ImageId3, Y) + Carry(ImageId2, ImageId4, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z) <= ImageDigit(ImageId1, X) + 2.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumTensPlace(W, X, Y, Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId3, Y) + Carry(ImageId2, ImageId4, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z) + 2.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * DigitSumOnesPlace(W, '0', '0', Z) + Carry(ImageId1, ImageId3, W) = SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z) .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * PlacedRepresentation(Z_100, Z_10, Z_1, Z) + ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z_1) .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * PlacedRepresentation(Z_100, Z_10, Z_1, Z) + ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z_10) .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * PlacedRepresentation(Z_100, Z_10, Z_1, Z) + ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z_100) .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * PlacedRepresentation(Z_100, Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z_1) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z_10) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z_100) <= ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * PlacedRepresentation(Z_100, Z_10, Z_1, Z) + ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z_1) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z_10) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z_100) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * PlacedRepresentation(Z_100, Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z_100) + ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z_1) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z_10) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + 0 * PlacedRepresentation(Z_100, Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '10', Z_10) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', Z_100) + ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '1', Z_1) + 2.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + ImageDigit(ImageId1, +X) <= 1 - ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) . {X: !PossibleTensDigit(X, Z)}",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + ImageDigit(ImageId3, +X) <= 1 - ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) . {X: !PossibleTensDigit(X, Z)}",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + ImageDigit(ImageId2, +X) <= 1 - ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) . {X: !PossibleOnesDigit(X, Z)}",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4) + ImageDigit(ImageId4, +X) <= 1 - ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, Z) . {X: !PossibleOnesDigit(X, Z)}",
+
+        "ImageSum(ImageId1, ImageId2, ImageId3, ImageId4, +Number) = 1 .",
+        "ImageDigit(ImageId, +X) = 1 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, P, +Z) = 1 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', '2') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', '3') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', '4') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', '5') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', '6') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', '7') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', '8') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, '100', '9') = 0 .",
+        "Carry(ImageIdX, ImageIdY, +W) = 1 ."
+    ],
+    "predicates": {
+        "NeuralClassifier/2": {
+            "type": "DeepPredicate",
+            "options": {
+                "model-path": "../../neural/models/mnist_classifier_neupsl.py::MNISTClassifierNeuPSL",
+                "entity-data-map-path": "../data/mnist-2/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/neural-data-train.txt",
+                "entity-argument-indexes": "0",
+                "class-size": 10,
+                "save-path": "../data/mnist-2/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/saved-networks/supervision-trained-digit-classifier.pt",
+                "pretrain-path": "../data/mnist-2/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/saved-networks/pretrained-digit-classifier.pt",
+                "alpha": 0.5,
+                "weight_decay": 1.0e-6,
+                "dropout": 0.2,
+                "categorical": "true",
+                "categoricalindexes": "1"
+            },
+            "evaluations": [
+                {
+                    "evaluator": "CategoricalEvaluator",
+                    "options": {
+                        "categoricalevaluator.categoryindexes": 1,
+                        "eval.includeobs": false
+                    }
+                }
+            ],
+            "targets": {
+                "infer": [
+                    "../data/mnist-2/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-test.txt"
+                ]
+            },
+            "truth": {
+                "infer": [
+                    "../data/mnist-2/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-test.txt"
+                ]
+            }
+        },
+        "ImageDigit/2": {
+            "options": {
+                    "integer": true,
+                    "categorical": true,
+                    "categoricalindexes": "1"
+            },
+            "evaluations": [
+                {
+                    "evaluator": "CategoricalEvaluator",
+                    "options": {
+                        "categoricalevaluator.categoryindexes": 1,
+                        "eval.includeobs": false
+                    },
+                    "primary": true
+                }
+            ],
+            "targets": {
+                "infer": [
+                    "../data/mnist-2/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-test.txt"
+                ]
+            },
+            "truth": {
+                "infer": [
+                    "../data/mnist-2/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-test.txt"
+                ]
+            }
+        },
+        "ImageSum/5": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-2/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-sum-truth-test.txt"
+                ]
+            }
+        },
+        "SumPlace/6": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-2/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-sum-place-truth-test.txt"
+                ]
+            }
+        },
+        "ImageSumBlock/4": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-2/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-sum-block-test.txt"
+                ]
+            }
+        },
+        "Carry/3": {
+            "options": {
+                "integer": true
+            },
+            "targets": {
+                "infer": [
+                    "../data/mnist-2/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/carry-target-test.txt"
+                ]
+            }
+        },
+        "DigitSumOnesPlace/4": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-2/digit-sum-ones-place-obs.txt"
+                ]
+            }
+        },
+        "DigitSumTensPlace/4": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-2/digit-sum-tens-place-obs.txt"
+                ]
+            }
+        },
+        "PlacedRepresentation/4": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-2/placed-representation.txt"
+                ]
+            }
+        },
+        "PossibleTensDigit/2": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-2/possible-tens-digit-obs.txt"
+                ]
+            }
+        },
+        "PossibleOnesDigit/2": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-2/possible-ones-digit-obs.txt"
+                ]
+            }
+        }
+    }
+}

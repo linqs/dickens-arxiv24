@@ -1,0 +1,40 @@
+{
+  "options": {
+    "categoricalevaluator.defaultpredicate": "HasCat",
+    "gradientdescent.batchgenerator": "NeuralBatchGenerator",
+    "gradientdescent.movementbreak": false,
+    "gradientdescent.numsteps": 10,
+    "gradientdescent.runfulliterations": false,
+    "gradientdescent.scalestepsize": false,
+    "gradientdescent.stepsize": 1.0e-14,
+    "gradientdescent.stopcomputeperiod": 1,
+    "gradientdescent.trainingcomputeperiod": 1,
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": 60,
+    "inference.normalize": false,
+    "runtime.db.intids": true,
+    "runtime.inference.method": "GurobiInference",
+    "runtime.inference.deep.batching": true,
+    "runtime.inference.output.results": true,
+    "runtime.learn": true,
+    "runtime.learn.method": "Energy",
+    "runtime.learn.output.model.path": "./citation_learned.psl",
+    "runtime.log.level": "INFO",
+    "runtime.validation": true,
+    "weightlearning.inference": "GurobiInference"
+  },
+  "hyperparameters": {
+  },
+  "default": {
+    "roadr": {
+      "0.05": {
+      },
+      "0.10": {
+      },
+      "0.50": {
+      },
+      "1.00": {
+      }
+    }
+  }
+}

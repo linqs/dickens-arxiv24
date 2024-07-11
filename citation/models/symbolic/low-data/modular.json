@@ -1,0 +1,78 @@
+{
+  "rules": [
+    "1.0: Neural(Paper, Label) = HasCat(Paper, Label) ^2",
+
+    "1.0: 0 * Link(Paper1, Paper2) + HasCat(Paper1, '0') = HasCat(Paper2, '0') ^2",
+    "1.0: 0 * Link(Paper1, Paper2) + HasCat(Paper1, '1') = HasCat(Paper2, '1') ^2",
+    "1.0: 0 * Link(Paper1, Paper2) + HasCat(Paper1, '2') = HasCat(Paper2, '2') ^2",
+    "1.0: 0 * Link(Paper1, Paper2) + HasCat(Paper1, '3') = HasCat(Paper2, '3') ^2",
+    "1.0: 0 * Link(Paper1, Paper2) + HasCat(Paper1, '4') = HasCat(Paper2, '4') ^2",
+    "1.0: 0 * Link(Paper1, Paper2) + HasCat(Paper1, '5') = HasCat(Paper2, '5') ^2",
+    "1.0: 0 * Link(Paper1, Paper2) + HasCat(Paper1, '6') = HasCat(Paper2, '6') ^2",
+
+    "HasCat(Paper, +Label) = 1 ."
+  ],
+  "predicates": {
+    "Neural/2": {
+      "observations": {
+        "learn": [
+          "data/category-neural-train.txt",
+          "data/category-neural-test.txt",
+          "data/category-neural-valid.txt",
+          "data/category-neural-latent.txt"
+        ],
+        "infer": [
+          "data/category-neural-test.txt",
+          "data/category-neural-latent.txt"
+        ]
+      }
+    },
+    "Link/2": {
+      "observations": {
+        "learn": [
+          "data/edges.txt"
+        ],
+        "infer": [
+          "data/edges.txt"
+        ]
+      }
+    },
+    "HasCat/2": {
+      "evaluations": [
+        {
+          "evaluator": "CategoricalEvaluator",
+          "options": {
+            "categoricalevaluator.categoryindexes": 1
+          }
+        }
+      ],
+      "observations": {
+        "infer": [
+          "data/category-truth-train.txt",
+          "data/category-truth-valid.txt"
+        ]
+      },
+      "targets": {
+        "learn": [
+          "data/category-target-train.txt",
+          "data/category-target-test.txt",
+          "data/category-target-valid.txt",
+          "data/category-target-latent.txt"
+        ],
+        "infer": [
+          "data/category-target-test.txt",
+          "data/category-target-latent.txt"
+        ]
+      },
+      "truth": {
+        "learn": [
+          "data/category-truth-train.txt",
+          "data/category-truth-valid.txt"
+        ],
+        "infer": [
+          "data/category-truth-test.txt"
+        ]
+      }
+    }
+  }
+}

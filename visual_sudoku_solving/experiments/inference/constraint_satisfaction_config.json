@@ -1,0 +1,11 @@
+{
+  "STANDARD_EXPERIMENT_OPTIONS": {
+    "runtime.learn": false,
+    "runtime.log.level": "INFO",
+    "inference.normalize": false,
+    "runtime.inference.clearrules": false,
+    "runtime.inference.method": "GurobiInference",
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": "60"
+  }
+}

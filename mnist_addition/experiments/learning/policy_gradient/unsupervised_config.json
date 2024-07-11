@@ -1,0 +1,111 @@
+{
+  "LEARNING_METHOD":  "policy_gradient",
+  "STANDARD_EXPERIMENT_OPTIONS": {
+    "categoricalevaluator.defaultpredicate": "ImageSum",
+    "runtime.log.level": "INFO",
+    "inference.normalize": "false",
+    "runtime.inference.method": "GurobiInference",
+    "runtime.inference.clearrules": true,
+    "weightlearning.inference": "GurobiInference",
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": 60,
+    "gradientdescent.batchgenerator": "ConnectedComponentBatchGenerator",
+    "gradientdescent.movementbreak": false,
+    "gradientdescent.numsteps": 500,
+    "gradientdescent.runfulliterations": false,
+    "gradientdescent.savevalidationweights": true,
+    "gradientdescent.scalestepsize": false,
+    "gradientdescent.stopcomputeperiod": 1,
+    "gradientdescent.symbolicweightlearning": false,
+    "gradientdescent.trainingcomputeperiod": 1,
+    "gradientdescent.validationcomputeperiod": 1,
+    "gradientdescent.validationbreak": true,
+    "gradientdescent.validationpatience": 75
+  },
+  "MODEL_WL_METHODS": {
+    "mnist-add1.json": [
+      "PolicyGradientEvaluation"
+    ],
+    "mnist-add1-integer.json": [
+      "PolicyGradientEvaluation"
+    ],
+    "mnist-add2.json": [
+      "PolicyGradientEvaluation"
+    ],
+    "mnist-add2-integer.json": [
+      "PolicyGradientEvaluation"
+    ]
+  },
+  "STANDARD_OPTION_RANGES": {
+    "connectedcomponents.batchsize": ["32"]
+  },
+  "WL_METHOD_OPTION_RANGES": {
+    "PolicyGradientEvaluation": {
+      "runtime.learn.method": ["PolicyGradientEvaluation"],
+      "policygradient.numsamples": ["1"],
+      "policygradient.policyupdate": ["INDEPENDENT_CATEGORICAL_REINFORCE"],
+      "policygradient.rewardfunction": ["EVALUATION"],
+      "policygradient.energylosscoefficient": ["0.1", "1.0", "10.0"]
+    }
+  },
+  "NEURAL_NETWORK_OPTION_RANGES": {
+    "dropout": ["0.0"],
+    "weight_decay": ["1.0e-6"],
+    "neural_learning_rate": ["1.0e-3", "1.0e-4", "1.0e-5"],
+    "alpha": ["1.0"]
+  },
+  "BEST_HYPERPARAMETERS": {
+    "mnist-add1.json": {
+      "PolicyGradientEvaluation": {
+        "TRAIN_SIZE": {
+          "00600": {
+            "UNLABELED_RATIO": {
+              "1.00": {
+                "PSL_OPTIONS": {
+                  "runtime.learn.method": "PolicyGradientEvaluation",
+                  "connectedcomponents.batchsize": "32",
+                  "policygradient.numsamples": "1",
+                  "policygradient.policyupdate": "INDEPENDENT_CATEGORICAL_REINFORCE",
+                  "policygradient.rewardfunction": "EVALUATION",
+                  "policygradient.energylosscoefficient": "10.0"
+                },
+                "NEURAL_OPTIONS": {
+                  "dropout": "0.0",
+                  "weight_decay": "1.0e-6",
+                  "neural_learning_rate": "1.0e-4",
+                  "alpha": "1.0"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "mnist-add2.json": {
+      "PolicyGradientEvaluation": {
+        "TRAIN_SIZE": {
+          "00600": {
+            "UNLABELED_RATIO": {
+              "1.00": {
+                "PSL_OPTIONS": {
+                  "runtime.learn.method": "PolicyGradientEvaluation",
+                  "connectedcomponents.batchsize": "32",
+                  "policygradient.energylosscoefficient": "10.0",
+                  "policygradient.numsamples": "1",
+                  "policygradient.policyupdate": "INDEPENDENT_CATEGORICAL_REINFORCE",
+                  "policygradient.rewardfunction": "EVALUATION"
+                },
+                "NEURAL_OPTIONS": {
+                  "alpha": "1.0",
+                  "dropout": "0.0",
+                  "neural_learning_rate": "1.0e-4",
+                  "weight_decay": "1.0e-6"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

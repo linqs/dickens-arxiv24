@@ -1,0 +1,105 @@
+{
+    "options": {
+        "categoricalevaluator.defaultpredicate": "ImageDigit",
+        "inference.normalize": false,
+        "runtime.db.intids": true,
+        "runtime.learn.output.model.path": "./mnist-addition_learned.psl",
+        "runtime.log.level": "INFO",
+        "runtime.validation": true
+    },
+    "infer": {
+        "rules": [
+            "1.0: NeuralClassifier(ImageId, X) = ImageDigit(ImageId, X)"
+        ]
+    },
+    "learn": {
+        "rules": [
+            "1.0: NeuralClassifier(ImageId, X) = ImageDigit(ImageId, X)"
+        ]
+    },
+    "predicates": {
+        "NeuralClassifier/2": {
+            "type": "DeepPredicate",
+            "options": {
+                "model-path": "../../neural/models/mnist_classifier_neupsl.py::MNISTClassifierNeuPSL",
+                "entity-data-map-path": "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/neural-data-train.txt",
+                "entity-argument-indexes": "0",
+                "class-size": 10,
+                "save-path": "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/saved-networks/supervision-trained-digit-classifier.pt",
+                "pretrain-path": "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/saved-networks/pretrained-digit-classifier.pt",
+                "alpha": 0.5,
+                "weight_decay": 1.0e-6,
+                "dropout": 0.2,
+                "categorical": "true",
+                "categoricalindexes": "1"
+            },
+            "evaluations": [
+                {
+                    "evaluator": "CategoricalEvaluator",
+                    "options": {
+                        "categoricalevaluator.categoryindexes": 1,
+                        "eval.includeobs": false
+                    }
+                }
+            ],
+            "targets": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-target-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-target-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-target-test.txt"
+                ]
+            },
+            "truth": {
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-test.txt"
+                ]
+            }
+        },
+        "ImageDigit/2": {
+            "options": {
+                    "integer": false,
+                    "categorical": true,
+                    "categoricalindexes": "1"
+            },
+            "evaluations": [
+                {
+                    "evaluator": "CategoricalEvaluator",
+                    "options": {
+                        "categoricalevaluator.categoryindexes": 1,
+                        "eval.includeobs": false
+                    },
+                    "primary": true
+                }
+            ],
+            "targets": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-test.txt"
+                ]
+            },
+            "truth": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-test.txt"
+                ]
+            }
+        }
+    }
+}

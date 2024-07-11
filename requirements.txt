@@ -1,0 +1,13 @@
+backoff==2.2.1
+dgl==2.2.1
+matplotlib==3.7.2
+numpy==2.0.0
+openai==1.35.13
+pandas==2.0.2
+Pillow==10.4.0
+scikit_learn==1.5.1
+scipy==1.14.0
+torch==2.2.2
+torchvision==0.17.2
+tqdm==4.65.0
+transformers==4.39.3

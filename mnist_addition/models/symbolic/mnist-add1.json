@@ -1,0 +1,313 @@
+{
+    "options": {
+        "categoricalevaluator.defaultpredicate": "ImageSum",
+        "inference.normalize": "false",
+        "runtime.db.intids": true,
+        "runtime.learn.output.model.path": "./mnist-addition_learned.psl",
+        "runtime.log.level": "INFO",
+        "runtime.validation": true
+    },
+    "infer": {
+        "rules": [
+            "1.0: NeuralClassifier(ImageId, X) = ImageDigit(ImageId, X)",
+
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId2, Y) <= SumPlace(ImageId1, ImageId2, '1', Z) + 1.0 ",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId1, X) + SumPlace(ImageId1, ImageId2, '1', Z) <= ImageDigit(ImageId2, Y) + 1.0 ",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId2, Y) + SumPlace(ImageId1, ImageId2, '1', Z) <= ImageDigit(ImageId1, X) + 1.0 ",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumTensPlace('0', X, Y, Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId2, Y) <= SumPlace(ImageId1, ImageId2, '10', Z) + 1.0 ",
+
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace(W, '0', '0', Z) + Carry(ImageId1, ImageId2, W) = SumPlace(ImageId1, ImageId2, '10', Z) .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '1', Z_1) .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '10', Z_10) .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, '1', Z_1) + SumPlace(ImageId1, ImageId2, '10', Z_10) <= ImageSum(ImageId1, ImageId2, Z) + 1.0 .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, '1', Z_1) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '10', Z_10) + 1.0 .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, '10', Z_10) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '1', Z_1) + 1.0 .",
+
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + ImageDigit(ImageId1, +X) <= 1 - ImageSum(ImageId1, ImageId2, Z) {X: !PossibleDigit(X, Z)}",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + ImageDigit(ImageId2, +X) <= 1 - ImageSum(ImageId1, ImageId2, Z) {X: !PossibleDigit(X, Z)}",
+
+            "ImageSum(ImageId1, ImageId2, +Z) = 1 .",
+            "ImageDigit(ImageId, +X) = 1 .",
+            "SumPlace(ImageId1, ImageId2, P, +Z) = 1 .",
+            "SumPlace(ImageId1, ImageId2, '10', '2') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '3') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '4') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '5') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '6') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '7') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '8') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '9') = 0 .",
+            "Carry(ImageIdX, ImageIdY, +W) = 1 ."
+        ]
+    },
+    "learn": {
+        "rules": [
+            "1.0: NeuralClassifier(ImageId, X) = ImageDigit(ImageId, X)",
+
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace('0', X, Y, Z) + NeuralClassifier(ImageId1, X) + NeuralClassifier(ImageId2, Y) <= SumPlace(ImageId1, ImageId2, '1', Z) + 1.0 ",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace('0', X, Y, Z) + NeuralClassifier(ImageId1, X) + SumPlace(ImageId1, ImageId2, '1', Z) <= NeuralClassifier(ImageId2, Y) + 1.0 ",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace('0', X, Y, Z) + NeuralClassifier(ImageId2, Y) + SumPlace(ImageId1, ImageId2, '1', Z) <= NeuralClassifier(ImageId1, X) + 1.0 ",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumTensPlace('0', X, Y, Z) + NeuralClassifier(ImageId1, X) + NeuralClassifier(ImageId2, Y) <= SumPlace(ImageId1, ImageId2, '10', Z) + 1.0 ",
+
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId2, Y) <= SumPlace(ImageId1, ImageId2, '1', Z) + 1.0 ",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId1, X) + SumPlace(ImageId1, ImageId2, '1', Z) <= ImageDigit(ImageId2, Y) + 1.0 ",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId2, Y) + SumPlace(ImageId1, ImageId2, '1', Z) <= ImageDigit(ImageId1, X) + 1.0 ",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumTensPlace('0', X, Y, Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId2, Y) <= SumPlace(ImageId1, ImageId2, '10', Z) + 1.0 ",
+
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * DigitSumOnesPlace(W, '0', '0', Z) + Carry(ImageId1, ImageId2, W) = SumPlace(ImageId1, ImageId2, '10', Z) .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '1', Z_1) .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '10', Z_10) .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, '1', Z_1) + SumPlace(ImageId1, ImageId2, '10', Z_10) <= ImageSum(ImageId1, ImageId2, Z) + 1.0 .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, '1', Z_1) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '10', Z_10) + 1.0 .",
+            "0 * ImageSumBlock(ImageId1, ImageId2) + 0 * PlacedRepresentation(Z_10, Z_1, Z) + SumPlace(ImageId1, ImageId2, '10', Z_10) + ImageSum(ImageId1, ImageId2, Z) <= SumPlace(ImageId1, ImageId2, '1', Z_1) + 1.0 .",
+
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + NeuralClassifier(ImageId1, +X) <= 1 - ImageSum(ImageId1, ImageId2, Z) {X: !PossibleDigit(X, Z)}",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + NeuralClassifier(ImageId2, +X) <= 1 - ImageSum(ImageId1, ImageId2, Z) {X: !PossibleDigit(X, Z)}",
+
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + ImageDigit(ImageId1, +X) <= 1 - ImageSum(ImageId1, ImageId2, Z) {X: !PossibleDigit(X, Z)}",
+            "1.0: 0 * ImageSumBlock(ImageId1, ImageId2) + ImageDigit(ImageId2, +X) <= 1 - ImageSum(ImageId1, ImageId2, Z) {X: !PossibleDigit(X, Z)}",
+
+            "ImageSum(ImageId1, ImageId2, +Z) = 1 .",
+            "ImageDigit(ImageId, +X) = 1 .",
+            "SumPlace(ImageId1, ImageId2, P, +Z) = 1 .",
+            "SumPlace(ImageId1, ImageId2, '10', '2') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '3') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '4') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '5') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '6') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '7') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '8') = 0 .",
+            "SumPlace(ImageId1, ImageId2, '10', '9') = 0 .",
+            "Carry(ImageIdX, ImageIdY, +W) = 1 ."
+        ]
+    },
+    "predicates": {
+        "NeuralClassifier/2": {
+            "type": "DeepPredicate",
+            "options": {
+                "model-path": "../../neural/models/mnist_classifier_neupsl.py::MNISTClassifierNeuPSL",
+                "entity-data-map-path": "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/neural-data-train.txt",
+                "entity-argument-indexes": "0",
+                "class-size": 10,
+                "save-path": "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/saved-networks/nesy-trained/trained_model.pt",
+                "pretrain-path": "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/saved-networks/pretrained-digit-classifier.pt",
+                "alpha": 0.5,
+                "weight_decay": 1.0e-6,
+                "dropout": 0.2,
+                "categorical": "true",
+                "categoricalindexes": "1"
+            },
+            "evaluations": [
+                {
+                    "evaluator": "CategoricalEvaluator",
+                    "options": {
+                        "categoricalevaluator.categoryindexes": 1,
+                        "eval.includeobs": false
+                    }
+                }
+            ],
+            "targets": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-target-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-target-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-target-test.txt"
+                ]
+            },
+            "truth": {
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-test.txt"
+                ]
+            }
+        },
+        "ImageDigit/2": {
+            "options": {
+                    "integer": false,
+                    "categorical": true,
+                    "categoricalindexes": "1"
+            },
+            "evaluations": [
+                {
+                    "evaluator": "CategoricalEvaluator",
+                    "options": {
+                        "categoricalevaluator.categoryindexes": 1,
+                        "eval.includeobs": false
+                    }
+                }
+            ],
+            "targets": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-test.txt"
+                ]
+            },
+            "truth": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-test.txt"
+                ]
+            }
+        },
+        "ImageSum/3": {
+            "options": {
+                "integer": false
+            },
+            "evaluations": [
+                {
+                    "evaluator": "CategoricalEvaluator",
+                    "options": {
+                        "categoricalevaluator.categoryindexes": 2,
+                        "eval.includeobs": false
+                    },
+                    "primary": true
+                }
+            ],
+            "targets": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-target-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-target-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-target-test.txt"
+                ]
+            },
+            "truth": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-truth-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-truth-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-truth-test.txt"
+                ]
+            }
+        },
+        "SumPlace/4": {
+            "options": {
+                "integer": false
+            },
+            "targets": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-place-target-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-place-target-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-place-target-test.txt"
+                ]
+            },
+            "truth": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-place-truth-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-place-truth-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-place-truth-test.txt"
+                ]
+            }
+        },
+        "ImageSumBlock/2": {
+            "observations": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-block-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-block-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-sum-block-test.txt"
+                ]
+            }
+        },
+        "Carry/3": {
+            "options": {
+                "integer": false
+            },
+            "targets": {
+                "learn": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/carry-target-train.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/carry-target-valid.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/carry-target-test.txt"
+                ]
+            }
+        },
+        "DigitSumOnesPlace/4": {
+            "observations": {
+                "learn": [
+                    "../data/mnist-1/digit-sum-ones-place-obs.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/digit-sum-ones-place-obs.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/digit-sum-ones-place-obs.txt"
+                ]
+            }
+        },
+        "DigitSumTensPlace/4": {
+            "observations": {
+                "learn": [
+                    "../data/mnist-1/digit-sum-tens-place-obs.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/digit-sum-tens-place-obs.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/digit-sum-tens-place-obs.txt"
+                ]
+            }
+        },
+        "PlacedRepresentation/3": {
+            "observations": {
+                "learn": [
+                    "../data/mnist-1/placed-representation.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/placed-representation.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/placed-representation.txt"
+                ]
+            }
+        },
+        "PossibleDigit/2": {
+            "observations": {
+                "learn": [
+                    "../data/mnist-1/possible-digit-obs.txt"
+                ],
+                "validation": [
+                    "../data/mnist-1/possible-digit-obs.txt"
+                ],
+                "infer": [
+                    "../data/mnist-1/possible-digit-obs.txt"
+                ]
+            }
+        }
+    }
+}

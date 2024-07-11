@@ -1,0 +1,122 @@
+{
+  "learn": {
+    "rules": [
+      "1.0: Neural(FrameID, BoundingBoxID, Class1) & !CoOccurrence(Class1, Class2) & !BoundingBox(Class1) & !BoundingBox(Class2) & !BoxConfidence(Class1) & !BoxConfidence(Class2) -> !Neural(FrameID, BoundingBoxID, Class2) ^2",
+
+      "1.0: Neural(FrameID, BoundingBoxID, +Class) = 1 ^2 {Class: Agent(Class)}",
+      "1.0: Neural(FrameID, BoundingBoxID, +Class) >= 1 ^2 {Class: Action(Class)}",
+      "1.0: Neural(FrameID, BoundingBoxID, +Class) >= 1 - Neural(FrameID, BoundingBoxID, '8') - Neural(FrameID, BoundingBoxID, '9') ^2 {Class: Location(Class)}"
+    ]
+  },
+  "infer": {
+    "rules": [
+      "1.0: Neural(FrameID, BoundingBoxID, Class) >= Label(FrameID, BoundingBoxID, Class)",
+      "1.5: Neural(FrameID, BoundingBoxID, Class) <= Label(FrameID, BoundingBoxID, Class)",
+
+      "Label(FrameID, BoundingBoxID, Class1) & !CoOccurrence(Class1, Class2) & !BoundingBox(Class1) & !BoundingBox(Class2) & !BoxConfidence(Class1) & !BoxConfidence(Class2) -> !Label(FrameID, BoundingBoxID, Class2) .",
+
+      "Label(FrameID, BoundingBoxID, +Class) = 1 . {Class: Agent(Class)}",
+      "Label(FrameID, BoundingBoxID, +Class) >= 1 . {Class: Action(Class)}",
+      "Label(FrameID, BoundingBoxID, +Class) >= 1 - Label(FrameID, BoundingBoxID, '8') - Label(FrameID, BoundingBoxID, '9') . {Class: Location(Class)}"
+    ]
+  },
+  "predicates": {
+    "Neural/3": {
+      "type": "DeepPredicate",
+      "options": {
+        "model-path": "../models/neural/roadr_detr_neupsl.py::RoadRDETRNeuPSL",
+        "entity-data-map-path": "../data/symbolic-data/experiment::batch-size-4/entity-data-map.txt",
+        "entity-argument-indexes": "0,1",
+        "class-size": 46,
+        "max-frames": 0,
+        "image-resize": 1.0,
+        "alpha": 1.0,
+        "learning-rate-backbone": 1.0e-7,
+        "weight-decay-backbone": 1.0e-5,
+        "learning-rate-transformer": 1.0e-6,
+        "weight-decay-transformer": 1.0e-5
+      },
+      "targets": {
+        "learn": [
+          "../data/symbolic-data/experiment::batch-size-4/entity-targets.txt"
+        ],
+        "infer": [
+          "../data/symbolic-data/experiment::batch-size-4/entity-targets.txt"
+        ]
+      }
+    },
+    "Label/3": {
+      "options": {
+        "Integer": "true"
+      },
+      "targets": {
+        "learn": [
+          "../data/symbolic-data/experiment::batch-size-4/entity-targets.txt"
+        ],
+        "infer": [
+          "../data/symbolic-data/experiment::batch-size-4/entity-targets.txt"
+        ]
+      }
+    },
+    "CoOccurrence/2": {
+      "observations": {
+        "learn": [
+          "../data/symbolic-data/experiment::batch-size-4/co-occurrence.txt"
+        ],
+        "infer": [
+          "../data/symbolic-data/experiment::batch-size-4/co-occurrence.txt"
+        ]
+      }
+    },
+    "Agent/1": {
+      "observations": {
+        "learn": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-agent.txt"
+        ],
+        "infer": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-agent.txt"
+        ]
+      }
+    },
+    "Action/1": {
+      "observations": {
+        "learn": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-action.txt"
+        ],
+        "infer": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-action.txt"
+        ]
+      }
+    },
+    "Location/1": {
+      "observations": {
+        "learn": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-location.txt"
+        ],
+        "infer": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-location.txt"
+        ]
+      }
+    },
+    "BoxConfidence/1": {
+      "observations": {
+        "learn": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-box-confidence.txt"
+        ],
+        "infer": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-box-confidence.txt"
+        ]
+      }
+    },
+    "BoundingBox/1": {
+      "observations": {
+        "learn": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-bounding-box.txt"
+        ],
+        "infer": [
+          "../data/symbolic-data/experiment::batch-size-4/classes-bounding-box.txt"
+        ]
+      }
+    }
+  }
+}

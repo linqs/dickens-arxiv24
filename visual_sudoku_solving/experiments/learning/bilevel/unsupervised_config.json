@@ -1,0 +1,116 @@
+{
+  "LEARNING_METHOD":  "bilevel",
+  "STANDARD_EXPERIMENT_OPTIONS": {
+    "categoricalevaluator.defaultpredicate": "ImageDigit",
+    "gradientdescent.batchgenerator": "ConnectedComponentBatchGenerator",
+    "gradientdescent.movementbreak": false,
+    "gradientdescent.numsteps": 500,
+    "gradientdescent.runfulliterations": false,
+    "gradientdescent.savevalidationweights": true,
+    "gradientdescent.scalestepsize": false,
+    "gradientdescent.stopcomputeperiod": 1,
+    "gradientdescent.symbolicweightlearning": false,
+    "gradientdescent.trainingcomputeperiod": 1,
+    "gradientdescent.validationbreak": true,
+    "gradientdescent.validationcomputeperiod": 1,
+    "gradientdescent.validationpatience": 75,
+    "gurobi.logtoconsole": false,
+    "gurobi.worklimit": 60,
+    "inference.normalize": false,
+    "runtime.inference.clearrules": true,
+    "runtime.inference.method": "GurobiInference",
+    "runtime.log.level": "INFO",
+    "weightlearning.inference": "GurobiInference"
+  },
+  "MODEL_WL_METHODS": {
+    "mnist-9x9.json": [
+      "BinaryCrossEntropy"
+    ],
+    "mnist-9x9-integer.json": [
+      "BinaryCrossEntropy"
+    ]
+  },
+  "STANDARD_OPTION_RANGES": {
+    "connectedcomponents.batchsize": ["4"]
+  },
+  "WL_METHOD_OPTION_RANGES": {
+    "BinaryCrossEntropy": {
+      "runtime.learn.method": ["BinaryCrossEntropy"],
+      "minimizer.energylosscoefficient": ["0.1", "1.0", "10.0", "100.0", "1000.0"],
+      "minimizer.finalparametermovementconvergencetolerance": ["1.0e-1"],
+      "minimizer.initialsquaredpenalty": ["2.0"],
+      "minimizer.objectivedifferencetolerance": ["1.0e-3"],
+      "minimizer.proxruleweight": ["1.0e-2"],
+      "minimizer.proxvaluestepsize": ["1.0e-3"],
+      "minimizer.squaredpenaltyincreaserate": ["2.0"]
+    }
+  },
+  "NEURAL_NETWORK_OPTION_RANGES": {
+    "alpha": ["0.01", "0.1", "0.5", "0.9"],
+    "dropout": ["0.0"],
+    "neural_learning_rate": ["1.0e-5", "1.0e-6"],
+    "weight_decay": ["1.0e-6"]
+  },
+  "BEST_HYPERPARAMETERS": {
+    "mnist-9x9.json": {
+      "BinaryCrossEntropy": {
+        "TRAIN_SIZE": {
+          "0100": {
+            "NUM_CLUES": {
+              "30": {
+                "UNLABELED_RATIO": {
+                  "1.00": {
+                    "PSL_OPTIONS": {
+                      "runtime.learn.method": "BinaryCrossEntropy",
+                      "connectedcomponents.batchsize": "4",
+                      "minimizer.energylosscoefficient": "10.0",
+                      "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
+                      "minimizer.initialsquaredpenalty": "2.0",
+                      "minimizer.objectivedifferencetolerance": "1.0e-3",
+                      "minimizer.proxruleweight": "1.0e-2",
+                      "minimizer.proxvaluestepsize": "1.0e-3",
+                      "minimizer.squaredpenaltyincreaserate": "2.0"
+                    },
+                    "NEURAL_OPTIONS": {
+                      "alpha": "0.1",
+                      "dropout": "0.0",
+                      "neural_learning_rate": "1.0e-5",
+                      "weight_decay": "1.0e-6"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "0020": {
+            "NUM_CLUES": {
+              "30": {
+                "UNLABELED_RATIO": {
+                  "1.00": {
+                    "PSL_OPTIONS": {
+                      "runtime.learn.method": "BinaryCrossEntropy",
+                      "connectedcomponents.batchsize": "4",
+                      "minimizer.energylosscoefficient": "1000.0",
+                      "minimizer.finalparametermovementconvergencetolerance": "1.0e-1",
+                      "minimizer.initialsquaredpenalty": "2.0",
+                      "minimizer.objectivedifferencetolerance": "1.0e-3",
+                      "minimizer.proxruleweight": "1.0e-2",
+                      "minimizer.proxvaluestepsize": "1.0e-3",
+                      "minimizer.squaredpenaltyincreaserate": "2.0"
+                    },
+                    "NEURAL_OPTIONS": {
+                      "alpha": "0.01",
+                      "dropout": "0.0",
+                      "neural_learning_rate": "1.0e-5",
+                      "weight_decay": "1.0e-6"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+Task Description: You are given an ordering. The task is to answer the question with an option. Use plain text formatting with no bullets.
+------
+Inferred:
+Order(station-wagon, second-newest) = 0
+Order(convertible, second-newest) = 1
+Order(minivan, second-newest) = 0
+Question:
+Which of the following is true?
+Options:
+A) The station wagon is the second-newest.
+B) The convertible is the second-newest.
+C) The minivan is the second-newest.
+###
+Answer:
+B
+------
+Inferred:
+Order(quail, rightmost) = 1
+Order(owl, rightmost) = 0
+Order(raven, rightmost) = 0
+Order(falcon, rightmost) = 0
+Order(robin, rightmost) = 0
+Question:
+Which of the following is true?
+Options:
+A) The quail is the rightmost.
+B) The owl is the rightmost.
+C) The raven is the rightmost.
+D) The falcon is the rightmost.
+E) The robin is the rightmost.
+###
+Answer:
+A
+------
+Inferred:
+[[INFERRED]]
+Question:
+[[QUESTION]]
+Options:
+[[CHOICES]]
+###

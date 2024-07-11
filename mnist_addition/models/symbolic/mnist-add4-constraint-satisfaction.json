@@ -1,0 +1,160 @@
+{
+    "options": {
+        "categoricalevaluator.defaultpredicate": "ImageDigit",
+        "inference.normalize": "false",
+        "runtime.db.intids": true,
+        "runtime.log.level": "INFO"
+    },
+    "rules": [
+        "1.0: NeuralClassifier(ImageId, X) = ImageDigit(ImageId, X)",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId4, X) + ImageDigit(ImageId8, Y) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '1', Z) + 1.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace('0', X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '1', Z) + ImageDigit(ImageId4, X) <= ImageDigit(ImageId8, Y) + 1.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace('0', X, Y, Z) + ImageDigit(ImageId8, Y) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '1', Z) <= ImageDigit(ImageId4, X) + 1.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumTensPlace('0', X, Y, Z) + ImageDigit(ImageId4, X) + ImageDigit(ImageId8, Y) <= Carry(ImageId4, ImageId8, Z) + 1.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + ImageDigit(ImageId3, X) + ImageDigit(ImageId7, Y) + Carry(ImageId4, ImageId8, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10', Z) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10', Z) + ImageDigit(ImageId3, X) + ImageDigit(ImageId7, Y) <= Carry(ImageId4, ImageId8, W) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + Carry(ImageId4, ImageId8, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10', Z) + ImageDigit(ImageId3, X) <= ImageDigit(ImageId7, Y) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + ImageDigit(ImageId7, Y) + Carry(ImageId4, ImageId8, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10', Z) <= ImageDigit(ImageId3, X) + 2.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumTensPlace(W, X, Y, Z) + ImageDigit(ImageId3, X) + ImageDigit(ImageId7, Y) + Carry(ImageId4, ImageId8, W) <= Carry(ImageId3, ImageId7, Z) + 2.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + ImageDigit(ImageId2, X) + ImageDigit(ImageId6, Y) + Carry(ImageId3, ImageId7, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '100', Z) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '100', Z) + ImageDigit(ImageId2, X) + ImageDigit(ImageId6, Y) <= Carry(ImageId3, ImageId7, W) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + Carry(ImageId3, ImageId7, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '100', Z) + ImageDigit(ImageId2, X) <= ImageDigit(ImageId6, Y) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + ImageDigit(ImageId6, Y) + Carry(ImageId3, ImageId7, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '100', Z) <= ImageDigit(ImageId2, X) + 2.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumTensPlace(W, X, Y, Z) + ImageDigit(ImageId2, X) + ImageDigit(ImageId6, Y) + Carry(ImageId3, ImageId7, W) <= Carry(ImageId2, ImageId6, Z) + 2.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId5, Y) + Carry(ImageId2, ImageId6, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '1000', Z) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '1000', Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId5, Y) <= Carry(ImageId2, ImageId6, W) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + Carry(ImageId2, ImageId6, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '1000', Z) + ImageDigit(ImageId1, X) <= ImageDigit(ImageId5, Y) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, X, Y, Z) + ImageDigit(ImageId5, Y) + Carry(ImageId2, ImageId6, W) + SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '1000', Z) <= ImageDigit(ImageId1, X) + 2.0 .",
+
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumTensPlace(W, X, Y, Z) + ImageDigit(ImageId1, X) + ImageDigit(ImageId5, Y) + Carry(ImageId2, ImageId6, W) <= SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', Z) + 2.0 .",
+        "0 * ImageSumBlock(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8) + 0 * DigitSumOnesPlace(W, '0', '0', Z) + Carry(ImageId1, ImageId5, W) = SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', Z) .",
+
+        "ImageDigit(ImageId, +X) = 1 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, P, +Z) = 1 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', '2') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', '3') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', '4') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', '5') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', '6') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', '7') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', '8') = 0 .",
+        "SumPlace(ImageId1, ImageId2, ImageId3, ImageId4, ImageId5, ImageId6, ImageId7, ImageId8, '10000', '9') = 0 .",
+        "Carry(ImageIdX, ImageIdY, +W) = 1 ."
+    ],
+    "predicates": {
+        "NeuralClassifier/2": {
+            "type": "DeepPredicate",
+            "options": {
+                "model-path": "../../neural/models/mnist_classifier_neupsl.py::MNISTClassifierNeuPSL",
+                "entity-data-map-path": "../data/mnist-4/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/neural-data-train.txt",
+                "entity-argument-indexes": "0",
+                "class-size": 10,
+                "save-path": "../data/mnist-4/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/saved-networks/supervision-trained-digit-classifier.pt",
+                "pretrain-path": "../data/mnist-4/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/saved-networks/pretrained-digit-classifier.pt",
+                "alpha": 0.5,
+                "weight_decay": 1.0e-6,
+                "dropout": 0.2,
+                "categorical": true,
+                "categoricalindexes": "1"
+            },
+            "evaluations": [
+                {
+                    "evaluator": "CategoricalEvaluator",
+                    "options": {
+                        "categoricalevaluator.categoryindexes": 1,
+                        "eval.includeobs": false
+                    }
+                }
+            ],
+            "targets": {
+                "infer": [
+                    "../data/mnist-4/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-test.txt"
+                ]
+            },
+            "truth": {
+                "infer": [
+                    "../data/mnist-4/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-test.txt"
+                ]
+            }
+        },
+        "ImageDigit/2": {
+            "options": {
+                    "integer": true,
+                    "categorical": true,
+                    "categoricalindexes": "1"
+            },
+            "evaluations": [
+                {
+                    "evaluator": "CategoricalEvaluator",
+                    "options": {
+                        "categoricalevaluator.categoryindexes": 1,
+                        "eval.includeobs": false
+                    },
+                    "primary": true
+                }
+            ],
+            "targets": {
+                "infer": [
+                    "../data/mnist-4/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-target-test.txt"
+                ]
+            },
+            "truth": {
+                "infer": [
+                    "../data/mnist-4/split::0/train-size::00600/unlabeled::0.00/overlap::0.00/image-digit-labels-test.txt"
+                ]
+            }
+        },
+        "SumPlace/10": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-4/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-sum-place-truth-test.txt"
+                ]
+            }
+        },
+        "ImageSumBlock/8": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-4/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/image-sum-block-test.txt"
+                ]
+            }
+        },
+        "Carry/3": {
+            "options": {
+                "integer": true
+            },
+            "targets": {
+                "infer": [
+                    "../data/mnist-4/split::0/train-size::06000/unlabeled::0.00/overlap::0.00/carry-target-test.txt"
+                ]
+            }
+        },
+        "DigitSumOnesPlace/4": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-4/digit-sum-ones-place-obs.txt"
+                ]
+            }
+        },
+        "DigitSumTensPlace/4": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-4/digit-sum-tens-place-obs.txt"
+                ]
+            }
+        },
+        "PlacedRepresentation/6": {
+            "observations": {
+                "infer": [
+                    "../data/mnist-4/placed-representation.txt"
+                ]
+            }
+        }
+    }
+}

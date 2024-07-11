@@ -1,0 +1,56 @@
+{
+  "options": {
+    "runtime.log.level": "TRACE",
+    "runtime.learn": "false",
+    "runtime.inference": "true",
+    "runtime.inference.method": "GurobiInference",
+    "weightlearning.inference": "GurobiInference",
+    "gurobi.worklimit": 60
+  },
+  "rules": [
+    "Order('owl', '1') = 1 .",
+    "Order('raven', '3') = 1 .",
+    "Order('quail', '5') = 1 .",
+    "Order('raven', '1') <= 1 - Order('robin', '2') - Order('robin', '3') - Order('robin', '4') - Order('robin', '5').",
+    "Order('raven', '2') <= 1 - Order('robin', '3') - Order('robin', '4') - Order('robin', '5') .",
+    "Order('raven', '3') <= 1 - Order('robin', '4') - Order('robin', '5') .",
+    "Order('raven', '4') <= 1 - Order('robin', '5') .",
+    "Order('raven', '5') <= 1 .",
+    "Order(Bird, '1') + Order(Bird, '2') + Order(Bird, '3') + Order(Bird, '4') + Order(Bird, '5') = 1 .",
+    "Order('quail', OrderIndex) + Order('owl', OrderIndex) + Order('raven', OrderIndex) + Order('falcon', OrderIndex) + Order('robin', OrderIndex) = 1 ."
+  ],
+  "predicates": {
+    "Order/2": {
+      "options": {
+        "Integer": "true"
+      },
+      "targets": [
+        ["quail","1"],
+        ["quail","2"],
+        ["quail","3"],
+        ["quail","4"],
+        ["quail","5"],
+        ["owl","1"],
+        ["owl","2"],
+        ["owl","3"],
+        ["owl","4"],
+        ["owl","5"],
+        ["raven","1"],
+        ["raven","2"],
+        ["raven","3"],
+        ["raven","4"],
+        ["raven","5"],
+        ["falcon","1"],
+        ["falcon","2"],
+        ["falcon","3"],
+        ["falcon","4"],
+        ["falcon","5"],
+        ["robin","1"],
+        ["robin","2"],
+        ["robin","3"],
+        ["robin","4"],
+        ["robin","5"]
+      ]
+    }
+  }
+}
