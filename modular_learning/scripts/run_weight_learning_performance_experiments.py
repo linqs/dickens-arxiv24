@@ -102,14 +102,15 @@ DATASET_OPTION_RANGES = {
 
 INFERENCE_OPTION_RANGES = {}
 
-FIRST_ORDER_WL_METHODS = ["SquaredError", "BinaryCrossEntropy", "StructuredPerceptron", "Energy"]
+WL_METHODS = ["SquaredError", "BinaryCrossEntropy", "StructuredPerceptron", "Energy",
+              "ContinuousRandomGridSearch", "GaussianProcessPrior"]
 
-FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES = {
+WL_METHODS_STANDARD_OPTION_RANGES = {
     "gradientdescent.negativelogregularization": ["1.0e-3"],
     "gradientdescent.negativeentropyregularization": ["0.0"]
 }
 
-FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
+WL_METHODS_OPTION_RANGES = {
     "StructuredPerceptron": {
         "runtime.learn.method": ["StructuredPerceptron"]
     },
@@ -131,6 +132,18 @@ FIRST_ORDER_WL_METHODS_OPTION_RANGES = {
         "minimizer.proxvaluestepsize": ["1.0e-1", "1.0e-2"],
         "minimizer.squaredpenaltyincreaserate": ["2.0"],
         "minimizer.proxruleweight": ["1.0e-1", "1.0e-2", "1.0e-3"]
+    },
+    "ContinuousRandomGridSearch": {
+        "runtime.learn.method": ["ContinuousRandomGridSearch"],
+        "continuousrandomgridsearch.maxlocations": ["100"],
+        "search.dirichlet": ["true"],
+        "search.dirichlet.alpha": ["1.0"],
+    },
+    "GaussianProcessPrior": {
+        "runtime.learn.method": ["GaussianProcessPrior"],
+        "gpp.earlyStopping": ["false"],
+        "gpp.maxiterations": ["100"],
+        "gpp.maxconfigs": ["100000"]
     }
 }
 
@@ -175,6 +188,18 @@ BEST_HYPERPARAMETERS = {
             "gradientdescent.stepsize": "1.0e-3",
             "gradientdescent.negativelogregularization": "1.0e-3",
             "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "ContinuousRandomGridSearch": {
+            "runtime.learn.method": "ContinuousRandomGridSearch",
+            "continuousrandomgridsearch.maxlocations": "100",
+            "search.dirichlet": "true",
+            "search.dirichlet.alpha": "1.0"
+        },
+        "GaussianProcessPrior": {
+            "runtime.learn.method": "GaussianProcessPrior",
+            "gpp.earlyStopping": "false",
+            "gpp.maxiterations": "100",
+            "gpp.maxconfigs": "100000"
         }
     },
     "citeseer": {
@@ -217,6 +242,18 @@ BEST_HYPERPARAMETERS = {
             "gradientdescent.stepsize": "1.0e-3",
             "gradientdescent.negativelogregularization": "1.0e-3",
             "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "ContinuousRandomGridSearch": {
+            "runtime.learn.method": "ContinuousRandomGridSearch",
+            "continuousrandomgridsearch.maxlocations": "100",
+            "search.dirichlet": "true",
+            "search.dirichlet.alpha": "1.0"
+        },
+        "GaussianProcessPrior": {
+            "runtime.learn.method": "GaussianProcessPrior",
+            "gpp.earlyStopping": "false",
+            "gpp.maxiterations": "100",
+            "gpp.maxconfigs": "100000"
         }
     },
     "cora": {
@@ -259,6 +296,18 @@ BEST_HYPERPARAMETERS = {
             "gradientdescent.stepsize": "1.0e-3",
             "gradientdescent.negativelogregularization": "1.0e-3",
             "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "ContinuousRandomGridSearch": {
+            "runtime.learn.method": "ContinuousRandomGridSearch",
+            "continuousrandomgridsearch.maxlocations": "100",
+            "search.dirichlet": "true",
+            "search.dirichlet.alpha": "1.0"
+        },
+        "GaussianProcessPrior": {
+            "runtime.learn.method": "GaussianProcessPrior",
+            "gpp.earlyStopping": "false",
+            "gpp.maxiterations": "100",
+            "gpp.maxconfigs": "100000"
         }
     },
     "drug-drug-interaction": {
@@ -301,6 +350,18 @@ BEST_HYPERPARAMETERS = {
             "gradientdescent.stepsize": "1.0e-3",
             "gradientdescent.negativelogregularization": "1.0e-3",
             "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "ContinuousRandomGridSearch": {
+            "runtime.learn.method": "ContinuousRandomGridSearch",
+            "continuousrandomgridsearch.maxlocations": "100",
+            "search.dirichlet": "true",
+            "search.dirichlet.alpha": "1.0"
+        },
+        "GaussianProcessPrior": {
+            "runtime.learn.method": "GaussianProcessPrior",
+            "gpp.earlyStopping": "false",
+            "gpp.maxiterations": "100",
+            "gpp.maxconfigs": "100000"
         }
     },
     "yelp": {
@@ -343,6 +404,18 @@ BEST_HYPERPARAMETERS = {
             "gradientdescent.stepsize": "1.0e-3",
             "gradientdescent.negativelogregularization": "1.0e-3",
             "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "ContinuousRandomGridSearch": {
+            "runtime.learn.method": "ContinuousRandomGridSearch",
+            "continuousrandomgridsearch.maxlocations": "100",
+            "search.dirichlet": "true",
+            "search.dirichlet.alpha": "1.0"
+        },
+        "GaussianProcessPrior": {
+            "runtime.learn.method": "GaussianProcessPrior",
+            "gpp.earlyStopping": "false",
+            "gpp.maxiterations": "100",
+            "gpp.maxconfigs": "100000"
         }
     },
     "stance-4forums": {
@@ -385,6 +458,18 @@ BEST_HYPERPARAMETERS = {
             "gradientdescent.stepsize": "1.0e-3",
             "gradientdescent.negativelogregularization": "1.0e-3",
             "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "ContinuousRandomGridSearch": {
+            "runtime.learn.method": "ContinuousRandomGridSearch",
+            "continuousrandomgridsearch.maxlocations": "100",
+            "search.dirichlet": "true",
+            "search.dirichlet.alpha": "1.0"
+        },
+        "GaussianProcessPrior": {
+            "runtime.learn.method": "GaussianProcessPrior",
+            "gpp.earlyStopping": "false",
+            "gpp.maxiterations": "100",
+            "gpp.maxconfigs": "100000"
         }
     },
     "stance-createdebate": {
@@ -427,8 +512,20 @@ BEST_HYPERPARAMETERS = {
             "gradientdescent.stepsize": "1.0e-3",
             "gradientdescent.negativelogregularization": "1.0e-3",
             "gradientdescent.negativeentropyregularization": "0.0"
+        },
+        "ContinuousRandomGridSearch": {
+            "runtime.learn.method": "ContinuousRandomGridSearch",
+            "continuousrandomgridsearch.maxlocations": "100",
+            "search.dirichlet": "true",
+            "search.dirichlet.alpha": "1.0"
+        },
+        "GaussianProcessPrior": {
+            "runtime.learn.method": "GaussianProcessPrior",
+            "gpp.earlyStopping": "false",
+            "gpp.maxiterations": "100",
+            "gpp.maxconfigs": "100000"
         }
-    },
+    }
 }
 
 
@@ -457,17 +554,17 @@ def run_first_order_wl_methods_hyperparameter_search(dataset: str):
         dataset_json = dataset_original_json
 
     standard_experiment_option_ranges = {**INFERENCE_OPTION_RANGES,
-                                         **FIRST_ORDER_WL_METHODS_STANDARD_OPTION_RANGES,
+                                         **WL_METHODS_STANDARD_OPTION_RANGES,
                                          **DATASET_OPTION_RANGES[dataset]}
 
-    for method in FIRST_ORDER_WL_METHODS:
+    for method in WL_METHODS:
         for split in HYPERPARAMETER_SPLITS:
             method_out_dir = os.path.join(base_out_dir, "{}/split::{}".format(method, split))
             os.makedirs(method_out_dir, exist_ok=True)
 
             # Iterate over every combination options values.
             method_options_dict = {**standard_experiment_option_ranges,
-                                   **FIRST_ORDER_WL_METHODS_OPTION_RANGES[method]}
+                                   **WL_METHODS_OPTION_RANGES[method]}
             for options in utils.enumerate_hyperparameters(method_options_dict):
                 experiment_out_dir = method_out_dir
                 for key, value in sorted(options.items()):
@@ -554,7 +651,7 @@ def run_first_order_wl_methods(dataset: str):
     else:
         dataset_json = dataset_original_json
 
-    for method in FIRST_ORDER_WL_METHODS:
+    for method in WL_METHODS:
         for split in SPLITS:
             method_out_dir = os.path.join(base_out_dir, "{}/split::{}".format(method, split))
             os.makedirs(method_out_dir, exist_ok=True)
@@ -622,20 +719,20 @@ def run_first_order_wl_methods(dataset: str):
             print("Finished experiment: Dataset:{}, Weight Learning Method: {}.".format(dataset, method))
 
 
-def parse_args() -> str:
+def parse_args() -> [str]:
     if len(sys.argv) != 2:
-        print("Usage: python3 run_weight_learning_performance_experiments.py <dataset>")
-        sys.exit(1)
-
-    dataset = sys.argv[1]
-    return dataset
+        datasets = STANDARD_DATASET_OPTIONS.keys()
+    else:
+        datasets = [sys.argv[1]]
+    return datasets
 
 
 def main():
-    dataset = parse_args()
+    datasets = parse_args()
 
-    run_first_order_wl_methods_hyperparameter_search(dataset)
-    run_first_order_wl_methods(dataset)
+    for dataset in datasets:
+        # run_first_order_wl_methods_hyperparameter_search(dataset)
+        run_first_order_wl_methods(dataset)
 
 
 if __name__ == '__main__':
