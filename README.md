@@ -25,9 +25,13 @@ Data for the logical deduction experiments is already created and included in th
 After creating the data, models must be prepared for experiments.
 Model preparation consists of pretraining and training the baseline neural models and the neural components of the NeuPSL models.
 
-Symbolic models for the `roadr`, `citation`, `path_finding`, `mnist_addition`, and `visual_sudoku_solving` experiments are already included in the repository.
-Neural models for the `roadr`, `citation`, `path_finding`, `mnist_addition`, and `visual_sudoku_solving` experiments must be (pre)trained.
-Run the `/scripts/train.py` and, if it exists, the `/scripts/pretrain.py` scripts in the corresponding experiment directories to (pre)train the neural models. 
+For the experiments involving `roadr`, `citation`, `path_finding`, `mnist_addition`, and `visual_sudoku_solving`, a neural component must first be trained.
+In some cases, such as `citation_network`, the trained baseline neural model is used directly as the neural component for NeuPSL.
+In other cases, such as `mnist_addition`, a pretrained neural model (trained without labels) serves as the neural component for NeuPSL.
+
+If a `/scripts/pretrain.py` script is available, run it first to handle any pretraining steps.
+After pretraining, or if no pretraining script is available, execute `/scripts/train.py` to train the baseline neural model.
+Once the neural model is either pretrained and/or trained, NeSy training can proceed.
 
 All symbolic models for the modular NeSy-EBM learning experiments will be cloned from the [psl-examples repository](https://github.com/linqs/psl-examples) repo by running the `modular_learning/scripts/setup_psl_examples.sh` script.
 The neural model predictions are included in the fetched data.
